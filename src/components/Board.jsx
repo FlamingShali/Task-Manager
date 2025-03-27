@@ -39,9 +39,8 @@ const Board = () => {
 
   return (
     <>
-      <button onClick={handleNewTask}>Test button</button>
       <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-        <div className="w-2/5 h-2/5 flex justify-between bg-amber-100">
+        <div className="w-full h-full flex justify-between self-center ">
           {statuses.map((status) => (
             <TaskColumn key={status} type={status}>
               <h1>{status}</h1>
@@ -51,6 +50,7 @@ const Board = () => {
                     {task.status === status.toLocaleLowerCase() && task.title}
                   </li>
                 ))}
+                <button onClick={handleNewTask}>Test button</button>
               </ul>
             </TaskColumn>
           ))}
