@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { tasksActions } from "../store/task-slice";
 import { DndContext, closestCorners } from "@dnd-kit/core";
+import { useId } from "react";
 
 import {
   SortableContext,
@@ -14,10 +15,12 @@ const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
 
+  const taskId = (Math.random() * 500).toFixed(2);
+  console.log(taskId);
   function handleNewTask() {
     dispatch(
       tasksActions.createTask({
-        id: "5",
+        id: taskId,
         title: "Added Task",
         status: "to do",
       })
