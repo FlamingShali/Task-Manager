@@ -40,20 +40,23 @@ const Board = () => {
   return (
     <>
       <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-        <div className="w-full h-full flex justify-between self-center ">
-          {statuses.map((status) => (
-            <TaskColumn key={status} type={status}>
-              <h1>{status}</h1>
-              <ul>
-                {tasks.map((task) => (
-                  <li key={task.id}>
-                    {task.status === status.toLocaleLowerCase() && task.title}
-                  </li>
-                ))}
-                <button onClick={handleNewTask}>Test button</button>
-              </ul>
-            </TaskColumn>
-          ))}
+        <div className="w-full h-full flex justify-between self-center flex-col">
+          <h1 className="w-full bg-red-300">Tasks</h1>
+          <div className="flex h-full w-full">
+            {statuses.map((status) => (
+              <TaskColumn key={status} type={status}>
+                <h1>{status}</h1>
+                <ul>
+                  {tasks.map((task) => (
+                    <li key={task.id}>
+                      {task.status === status.toLocaleLowerCase() && task.title}
+                    </li>
+                  ))}
+                  <button onClick={handleNewTask}>Test button</button>
+                </ul>
+              </TaskColumn>
+            ))}
+          </div>
         </div>
       </DndContext>
     </>

@@ -1,5 +1,7 @@
 const TaskColumn = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="mx-50 my-5">
+    
+    {children}</div>;
 };
 
 export default TaskColumn;
