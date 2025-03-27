@@ -10,9 +10,6 @@ import TaskColumn from "./TaskColumn";
 import Task from "./Task";
 
 const statuses = ["To Do", "In Progress", "Done"];
-const toDo = statuses[0];
-const inProgress = statuses[1];
-const done = statuses[2];
 
 const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -44,15 +41,26 @@ const Board = () => {
     <>
       <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
         <div className="w-full h-full flex justify-between self-center flex-col">
-          <h1 className="w-full text-[2rem] bg-red-300 m-10">Tasks</h1>
+          <h1 className="w-full text-[2rem] 0 m-10 border-b-[2px] border-gray-300 ">
+            Tasks
+          </h1>
           <div className="flex h-full w-full">
             {statuses.map((status) => (
               <TaskColumn>
                 <h1>{status}</h1>
                 <ul>
-                  {tasks.toDo.map((task) => (
-                    <Task taskType={toDo} task={task} />
-                  ))}
+                  {status === "To Do" &&
+                    tasks.toDo.map((task) => (
+                      <Task taskType={status} task={task} />
+                    ))}
+                  {status === "In Progress" &&
+                    tasks.inProgress.map((task) => (
+                      <Task taskType={status} task={task} />
+                    ))}
+                  {status === "Done" &&
+                    tasks.done.map((task) => (
+                      <Task taskType={status} task={task} />
+                    ))}
                 </ul>
               </TaskColumn>
             ))}

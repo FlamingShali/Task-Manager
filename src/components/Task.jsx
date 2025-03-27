@@ -1,8 +1,16 @@
 const Task = ({ task, taskType }) => {
   return (
-    <li key={task.id} className="border-[2px] m-5">
-      {task.status === taskType.toLocaleLowerCase() && <p>{task.title}</p>}
-    </li>
+    <>
+      {task.status === taskType.toLocaleLowerCase() && (
+        <li
+          key={task.id}
+          className="border-[2px] m-5 rounded-[5px] border-gray-300 "
+        >
+          <p>{task.title}</p>
+          <p>{task.description}</p>
+        </li>
+      )}
+    </>
   );
 };
 
