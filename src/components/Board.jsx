@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { tasksActions } from "../store/task-slice";
 import { DndContext, closestCorners } from "@dnd-kit/core";
-import { useId } from "react";
 
 import {
   SortableContext,
@@ -10,6 +9,9 @@ import {
 import TaskColumn from "./TaskColumn";
 
 const statuses = ["To Do", "In Progress", "Done"];
+const toDo = statuses[0];
+const inProgress = statuses[1];
+const done = statuses[2];
 
 const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -41,22 +43,46 @@ const Board = () => {
     <>
       <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
         <div className="w-full h-full flex justify-between self-center flex-col">
-          <h1 className="w-full bg-red-300">Tasks</h1>
+          <h1 className="w-full text-[2rem] bg-red-300 m-10">Tasks</h1>
           <div className="flex h-full w-full">
-            {statuses.map((status) => (
-              <TaskColumn key={status} type={status}>
-                <h1>{status}</h1>
-                <ul>
-                  {tasks.map((task) => (
-                    <li key={task.id}>
-                      {task.status === status.toLocaleLowerCase() && task.title}
-                    </li>
-                  ))}
-                  <button onClick={handleNewTask}>Test button</button>
-                </ul>
-              </TaskColumn>
-            ))}
+            <TaskColumn type={toDo}>
+              <h1>To do</h1>
+              <ul>
+                {tasks.toDo.map((task) => (
+                  <li key={task.id} className="border-[2px] ">
+                    {task.status === toDo.toLocaleLowerCase() && (
+                      <p>{task.title}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </TaskColumn>
+            <TaskColumn type={inProgress}>
+              <h1>To do</h1>
+              <ul>
+                {tasks.inProgress.map((task) => (
+                  <li key={task.id} className="border-[2px]">
+                    {task.status === inProgress.toLocaleLowerCase() && (
+                      <p>{task.title}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </TaskColumn>
+            <TaskColumn type={done}>
+              <h1>To do</h1>
+              <ul>
+                {tasks.done.map((task) => (
+                  <li key={task.id} className="border-[2px]">
+                    {task.status === done.toLocaleLowerCase() && (
+                      <p>{task.title}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </TaskColumn>
           </div>
+          <button onClick={handleNewTask}>Test button</button>
         </div>
       </DndContext>
     </>

@@ -1,11 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialTaskState = {
-  tasks: [
-    { id: "1", title: "Task 1", status: "to do" },
-    { id: "2", title: "Task 2", status: "done" },
-    { id: "3", title: "Task 3", status: "in progress" },
-  ],
+  tasks: {
+    toDo: [
+      {
+        id: 1,
+        title: "Task 1",
+        description: "Description of the task",
+        status: "to do",
+      },
+    ],
+    inProgress: [
+      {
+        id: 2,
+        title: "Task 2",
+        description: "Description of the 2 task",
+        status: "in progress",
+      },
+    ],
+    done: [
+      {
+        id: 3,
+        title: "Task 3",
+        description: "Description of the 3rd task",
+        status: "done",
+      },
+    ],
+  },
 };
 
 const tasksSlice = createSlice({
@@ -13,7 +34,7 @@ const tasksSlice = createSlice({
   initialState: initialTaskState,
   reducers: {
     createTask(state, action) {
-      state.tasks.push(action.payload);
+      state.tasks.toDo.push(action.payload);
     },
     updateTaskStatus(state, action) {
       const { id, status } = action.payload;
