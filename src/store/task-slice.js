@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialTaskState = {
   tasks: [
-    { id: "1", title: "Task 1", status: "todo" },
+    { id: "1", title: "Task 1", status: "to do" },
     { id: "2", title: "Task 2", status: "done" },
-    { id: "3", title: "Task 3", status: "in-progress" },
+    { id: "3", title: "Task 3", status: "in progress" },
   ],
 };
 

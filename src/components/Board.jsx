@@ -6,6 +6,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import TaskColumn from "./TaskColumn";
 
 const statuses = ["To Do", "In Progress", "Done"];
 
@@ -25,12 +26,20 @@ const Board = () => {
 
   return (
     <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-      <div className="w-2/5 h-2/5 bg-amber-100">
-        {tasks.map((task) => (
+      <div className="w-2/5 h-2/5 flex justify-between bg-amber-100">
+        {statuses.map((status) => (
+          <TaskColumn key={status} type={status}>
+            <h1>{status}</h1>
+            {tasks.map((task) => (
+              <p>{task.status === status.toLocaleLowerCase() && task.title}</p>
+            ))}
+          </TaskColumn>
+        ))}
+        {/* {tasks.map((task) => (
           <div key={task.id}>
             <p>{task.title}</p>
           </div>
-        ))}
+        ))} */}
       </div>
     </DndContext>
   );
