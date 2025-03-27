@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { updateTaskStatus } from "../store/task-slice";
+import { tasksActions } from "../store/task-slice";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 
 import {
@@ -14,6 +14,16 @@ const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
 
+  function handleNewTask() {
+    dispatch(
+      tasksActions.createTask({
+        id: "5",
+        title: "Added Task",
+        status: "to do",
+      })
+    );
+  }
+
   const onDragEnd = (event) => {
     const { active, over } = event;
     if (!over) return;
@@ -21,27 +31,29 @@ const Board = () => {
     const taskId = active.id;
     const newStatus = over.id;
 
-    dispatch(updateTaskStatus({ id: taskId, status: newStatus }));
+    dispatch(tasksActions.updateTaskStatus({ id: taskId, status: newStatus }));
   };
 
   return (
-    <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-      <div className="w-2/5 h-2/5 flex justify-between bg-amber-100">
-        {statuses.map((status) => (
-          <TaskColumn key={status} type={status}>
-            <h1>{status}</h1>
-            {tasks.map((task) => (
-              <p>{task.status === status.toLocaleLowerCase() && task.title}</p>
-            ))}
-          </TaskColumn>
-        ))}
-        {/* {tasks.map((task) => (
-          <div key={task.id}>
-            <p>{task.title}</p>
-          </div>
-        ))} */}
-      </div>
-    </DndContext>
+    <>
+      <button onClick={handleNewTask}>Test button</button>
+      <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
+        <div className="w-2/5 h-2/5 flex justify-between bg-amber-100">
+          {statuses.map((status) => (
+            <TaskColumn key={status} type={status}>
+              <h1>{status}</h1>
+              <ul>
+                {tasks.map((task) => (
+                  <li key={task.id}>
+                    {task.status === status.toLocaleLowerCase() && task.title}
+                  </li>
+                ))}
+              </ul>
+            </TaskColumn>
+          ))}
+        </div>
+      </DndContext>
+    </>
   );
 };
 
