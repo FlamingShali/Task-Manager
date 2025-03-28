@@ -36,6 +36,8 @@ const tasksSlice = createSlice({
     createTask(state, action) {
       state.tasks.inProgress.push(action.payload);
     },
+
+    
     moveTask(state, action) {
       const { id, from, to } = action.payload;
 
