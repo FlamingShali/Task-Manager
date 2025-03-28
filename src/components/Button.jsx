@@ -1,10 +1,14 @@
-
-const Button = () => {
+const Button = ({ children, clickHandler, additionalStyles }) => {
   return (
-    <div className="">
-      
-    </div>
-  )
+    <button
+      onClick={clickHandler}
+      className={`border-[1px] hover:bg-gray-200 transition-all my-1 ${
+        !additionalStyles ? "cursor-pointer" : ""
+      }`}
+    >
+      {children}
+    </button>
+  );
 };
 
-export default Button
+export default Button;

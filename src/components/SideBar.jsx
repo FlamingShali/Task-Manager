@@ -1,12 +1,16 @@
+import Button from "./Button";
+
 const SideBar = () => {
   return (
     <aside className="h-screen w-1/6 border-r-[2px] border-r-gray-300 flex flex-col ">
-      <button className="my-3 h-[3rem] bg-red-500">Dashboard</button>
-      <button className=" bg-green-500 ">Tasks</button>
-      <button>Members</button>
-      <button>Reports</button>
-      <button>Payments</button>
-      <button>Integration</button>
+      <h1 className="my-3 text-center font-bold text-xl border-b-[2px] border-gray-300 h-[3rem] ">
+        Dashboard
+      </h1>
+      <Button>Tasks</Button>
+      <Button>Members</Button>
+      <Button>Reports</Button>
+      <Button>Payments</Button>
+      <Button>Integration</Button>
     </aside>
   );
 };

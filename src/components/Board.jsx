@@ -8,6 +8,7 @@ import {
 } from "@dnd-kit/sortable";
 import TaskColumn from "./TaskColumn";
 import Task from "./Task";
+import Button from "./Button";
 
 const statuses = ["To Do", "In Progress", "Done"];
 
@@ -37,6 +38,11 @@ const Board = () => {
     dispatch(tasksActions.updateTaskStatus({ id: taskId, status: newStatus }));
   };
 
+  //   const year = new Date().getFullYear();
+  //   const month = new Date().getMonth();
+  //   const data = new Date().getDate();
+  //   console.log(`${year}:${month}:${data}`);
+
   return (
     <>
       <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
@@ -46,26 +52,26 @@ const Board = () => {
           </h1>
           <div className="flex h-full w-full">
             {statuses.map((status) => (
-              <TaskColumn>
+              <TaskColumn key={status}>
                 <h1>{status}</h1>
                 <ul>
                   {status === "To Do" &&
                     tasks.toDo.map((task) => (
-                      <Task taskType={status} task={task} />
+                      <Task taskType={status} task={task} key={task.id} />
                     ))}
                   {status === "In Progress" &&
                     tasks.inProgress.map((task) => (
-                      <Task taskType={status} task={task} />
+                      <Task taskType={status} task={task} key={task.id} />
                     ))}
                   {status === "Done" &&
                     tasks.done.map((task) => (
-                      <Task taskType={status} task={task} />
+                      <Task taskType={status} task={task} key={task.id} />
                     ))}
                 </ul>
               </TaskColumn>
             ))}
           </div>
-          <button onClick={handleNewTask}>Test button</button>
+          <Button clickHandler={handleNewTask}>Test button</Button>
         </div>
       </DndContext>
     </>
