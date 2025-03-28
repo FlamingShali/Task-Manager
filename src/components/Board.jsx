@@ -10,7 +10,10 @@ import TaskColumn from "./TaskColumn";
 import Task from "./Task";
 import Button from "./Button";
 
-const statuses = ["To Do", "In Progress", "Done"];
+const statuses = ["toDo", "inProgress", "done"];
+const toDo = statuses[0];
+const inProgress = statuses[1];
+const done = statuses[2];
 
 const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -23,20 +26,14 @@ const Board = () => {
       tasksActions.createTask({
         id: taskId,
         title: "Added Task",
-        status: "to do",
+        status: "in progress",
       })
     );
   }
 
-  const onDragEnd = (event) => {
-    const { active, over } = event;
-    if (!over) return;
+  console.log(tasks);
 
-    const taskId = active.id;
-    const newStatus = over.id;
-
-    dispatch(tasksActions.updateTaskStatus({ id: taskId, status: newStatus }));
-  };
+  const onDragEnd = (event) => {};
 
   //   const year = new Date().getFullYear();
   //   const month = new Date().getMonth();
@@ -51,25 +48,21 @@ const Board = () => {
             Tasks
           </h1>
           <div className="flex h-full w-full">
-            {statuses.map((status) => (
-              <TaskColumn key={status}>
-                <h1>{status}</h1>
-                <ul>
-                  {status === "To Do" &&
-                    tasks.toDo.map((task) => (
-                      <Task taskType={status} task={task} key={task.id} />
-                    ))}
-                  {status === "In Progress" &&
-                    tasks.inProgress.map((task) => (
-                      <Task taskType={status} task={task} key={task.id} />
-                    ))}
-                  {status === "Done" &&
-                    tasks.done.map((task) => (
-                      <Task taskType={status} task={task} key={task.id} />
-                    ))}
-                </ul>
-              </TaskColumn>
-            ))}
+            <TaskColumn status={toDo}>
+              {tasks.toDo.map((task) => (
+                <Task task={task} key={task.id} taskType={toDo} />
+              ))}
+            </TaskColumn>
+            <TaskColumn status={inProgress}>
+              {tasks.inProgress.map((task) => (
+                <Task task={task} key={task.id} taskType={inProgress} />
+              ))}
+            </TaskColumn>
+            <TaskColumn status={done}>
+              {tasks.done.map((task) => (
+                <Task task={task} key={task.id} taskType={done} />
+              ))}
+            </TaskColumn>
           </div>
           <Button clickHandler={handleNewTask}>Test button</Button>
         </div>

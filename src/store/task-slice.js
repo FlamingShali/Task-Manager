@@ -7,7 +7,7 @@ const initialTaskState = {
         id: 1,
         title: "Task 1",
         description: "Description of the task",
-        status: "to do",
+        status: "toDo",
       },
     ],
     inProgress: [
@@ -15,7 +15,7 @@ const initialTaskState = {
         id: 2,
         title: "Task 2",
         description: "Description of the 2 task",
-        status: "in progress",
+        status: "inProgress",
       },
     ],
     done: [
@@ -34,15 +34,9 @@ const tasksSlice = createSlice({
   initialState: initialTaskState,
   reducers: {
     createTask(state, action) {
-      state.tasks.toDo.push(action.payload);
+      state.tasks.inProgress.push(action.payload);
     },
-    updateTaskStatus(state, action) {
-      const { id, status } = action.payload;
-      const task = state.tasks.find((task) => task.id === id);
-      if (task) {
-        task.status = status;
-      }
-    },
+    updateTaskStatus(state, action) {},
     removeTask(state, action) {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
