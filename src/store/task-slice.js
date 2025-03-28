@@ -36,9 +36,30 @@ const tasksSlice = createSlice({
     createTask(state, action) {
       state.tasks.inProgress.push(action.payload);
     },
-    updateTaskStatus(state, action) {},
+    moveTask(state, action) {
+      const { id, from, to } = action.payload;
+
+      const sourceList = state.tasks[from];
+      const targetList = state.tasks[to];
+
+      const taskIndex = sourceList.findIndex((task) => task.id === id);
+
+      if (taskIndex !== -1) {
+        const task = sourceList.splice(taskIndex, 1)[0];
+        task.status = to;
+        targetList.push(task);
+      }
+    },
     removeTask(state, action) {
-      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+      for (let key in state.tasks) {
+        const taskIndex = state.tasks[key].findIndex(
+          (task) => task.id === action.payload
+        );
+        if (taskIndex !== -1) {
+          state.tasks[key].splice(taskIndex, 1);
+          break;
+        }
+      }
     },
   },
 });
