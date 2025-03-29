@@ -70,6 +70,7 @@ const Board = () => {
           </div>
           <Button clickHandler={handleNewTask}>Test create</Button>
           <Button clickHandler={handleSwitchStatus}>Test switch</Button>
+          <Button clickHandler={handleSwitchStatus}>Test switch</Button>
         </div>
       </DndContext>
     </>

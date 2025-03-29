@@ -37,7 +37,6 @@ const tasksSlice = createSlice({
       state.tasks.inProgress.push(action.payload);
     },
 
-    
     moveTask(state, action) {
       const { id, from, to } = action.payload;
 
@@ -53,15 +52,11 @@ const tasksSlice = createSlice({
       }
     },
     removeTask(state, action) {
-      for (let key in state.tasks) {
-        const taskIndex = state.tasks[key].findIndex(
-          (task) => task.id === action.payload
-        );
-        if (taskIndex !== -1) {
-          state.tasks[key].splice(taskIndex, 1);
-          break;
-        }
-      }
+      const { id, array } = action.payload;
+      const targetList = state.tasks[array];
+      let removedTask = targetList.findIndex((task) => task.id === id);
+
+      const task = targetList.splice(taskIndex, 1)[0];
     },
   },
 });
