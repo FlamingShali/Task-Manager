@@ -1,4 +1,4 @@
-const Task = ({ task, taskType }) => {
+const Task = ({ task }) => {
   return (
     <>
       <li
@@ -7,14 +7,7 @@ const Task = ({ task, taskType }) => {
       >
         <p>{task.title}</p>
         <p>{task.description}</p>
-        <div className="flex ">
-          <label>Task's status:</label>
-          <select className="text-center border-2">
-            <option>ToDo</option>
-            <option>In Progress</option>
-            <option>Done</option>
-          </select>
-        </div>
+        <div className="flex "></div>
       </li>
     </>
   );

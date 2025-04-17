@@ -9,6 +9,7 @@ import {
 import TaskColumn from "./TaskColumn";
 import Task from "./Task";
 import Button from "./Button";
+import { useState } from "react";
 
 const statuses = ["toDo", "inProgress", "done"];
 const toDo = statuses[0];
@@ -18,6 +19,7 @@ const done = statuses[2];
 const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
+  const [activeTask, setActiveTask] = useState(null);
 
   const taskId = (Math.random() * 500).toFixed(2);
   console.log(taskId);
@@ -33,6 +35,10 @@ const Board = () => {
 
   function handleSwitchStatus() {
     dispatch(tasksActions.moveTask({ id: 1, from: toDo, to: inProgress }));
+  }
+
+  function handleActiveTask(task) {
+    setActiveTask(task.id);
   }
 
   console.log(tasks);
@@ -59,7 +65,7 @@ const Board = () => {
             </TaskColumn>
             <TaskColumn status={inProgress}>
               {tasks.inProgress.map((task) => (
-                <Task task={task} key={task.id} taskType={inProgress} />
+                <Task task={task} key={task.id} taskType={inProgress} onClick={handleActiveTask}/>
               ))}
             </TaskColumn>
             <TaskColumn status={done}>
