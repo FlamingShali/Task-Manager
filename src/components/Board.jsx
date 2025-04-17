@@ -22,7 +22,6 @@ const Board = () => {
   const [activeTask, setActiveTask] = useState(null);
 
   const taskId = (Math.random() * 500).toFixed(2);
-  console.log(taskId);
   function handleNewTask() {
     dispatch(
       tasksActions.createTask({
@@ -42,7 +41,7 @@ const Board = () => {
   }
 
   console.log(tasks);
-
+  console.log(activeTask);
   const onDragEnd = (event) => {};
 
   //   const year = new Date().getFullYear();
@@ -60,17 +59,35 @@ const Board = () => {
           <div className="flex h-full w-full">
             <TaskColumn status={toDo}>
               {tasks.toDo.map((task) => (
-                <Task task={task} key={task.id} taskType={toDo} />
+                <Task
+                  task={task}
+                  key={task.id}
+                  taskType={toDo}
+                  onActiveTask={handleActiveTask}
+                  activeTask={activeTask}
+                />
               ))}
             </TaskColumn>
             <TaskColumn status={inProgress}>
               {tasks.inProgress.map((task) => (
-                <Task task={task} key={task.id} taskType={inProgress} onClick={handleActiveTask}/>
+                <Task
+                  task={task}
+                  key={task.id}
+                  taskType={inProgress}
+                  onActiveTask={handleActiveTask}
+                  activeTask={activeTask}
+                />
               ))}
             </TaskColumn>
             <TaskColumn status={done}>
               {tasks.done.map((task) => (
-                <Task task={task} key={task.id} taskType={done} />
+                <Task
+                  task={task}
+                  key={task.id}
+                  taskType={done}
+                  onActiveTask={handleActiveTask}
+                  activeTask={activeTask}
+                />
               ))}
             </TaskColumn>
           </div>
