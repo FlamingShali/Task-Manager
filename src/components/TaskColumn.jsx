@@ -5,9 +5,9 @@ const TaskColumn = ({ status, children }) => {
     return upperStatus;
   };
 
-  const toDoStyles = "shadow-red-300 shadow-xl bg-red-50";
-  const inProgressStyles = "shadow-amber-300 shadow-xl bg-amber-50";
-  const doneStyles = "shadow-green-300 shadow-xl bg-green-50";
+  const toDoStyles = "shadow-red-800 shadow-xl bg-red-800";
+  const inProgressStyles = "shadow-yellow-800 shadow-xl bg-yellow-800";
+  const doneStyles = "shadow-green-800 shadow-xl bg-green-800";
 
   const additionalStyles = {
     toDo: toDoStyles,
@@ -17,7 +17,7 @@ const TaskColumn = ({ status, children }) => {
 
   return (
     <div
-      className={`w-1/3 mx-30 my-5 border-[2px] border-gray-200 rounded-[20px] ${additionalStyles[status]}`}
+      className={`w-1/3 sm:mx-5 2xl:mx-20 my-5 border-[2px] border-gray-200 rounded-[20px] ${additionalStyles[status]}`}
     >
       <h1 className="text-center font-bold text-[2rem] mt-5">
         {convertedStatus(status)}

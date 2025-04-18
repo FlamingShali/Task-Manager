@@ -6,12 +6,13 @@ const SideBar = () => {
       <h1 className="my-3 text-center font-bold text-xl border-b-[2px] border-gray-300 h-[3rem] ">
         Dashboard
       </h1>
-      <Button>Tasks</Button>
-      <Button>Members</Button>
-      <Button>Reports</Button>
-      <Button>Payments</Button>
-      <Button>Integration</Button>
-      
+      <div className="flex flex-col items-center justify-start h-1/2 w-full">
+        <Button>Tasks</Button>
+        <Button>Members</Button>
+        <Button>Reports</Button>
+        <Button>Payments</Button>
+        <Button>Integration</Button>
+      </div>
     </aside>
   );
 };

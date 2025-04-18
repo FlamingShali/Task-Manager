@@ -5,7 +5,7 @@ import SideBar from "./components/SideBar";
 function App() {
   return (
     <>
-      <div className="h-screen flex flex-col bg-gray-100">
+      <div className="h-screen flex flex-col text-gray-50 bg-gray-900">
         <Header />
         <div className="flex h-11/12">
           <SideBar />
