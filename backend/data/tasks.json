@@ -1,27 +1,26 @@
 {
-    "toDo": [
-      {
-        "id": 1,
-        "title": "Task 1",
-        "description": "Description of the task",
-        "status": "toDo"
-      }
-    ],
-    "inProgress": [
-      {
-        "id": 2,
-        "title": "Task 2",
-        "description": "Description of the 2 task",
-        "status": "inProgress"
-      }
-    ],
-    "done": [
-      {
-        "id": 3,
-        "title": "Task 3",
-        "description": "Description of the 3rd task",
-        "status": "done"
-      }
-    ]
-  }
-  
+  "toDo": [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "description": "Description of the task",
+      "status": "toDo"
+    }
+  ],
+  "inProgress": [
+    {
+      "id": 2,
+      "title": "Task 2",
+      "description": "Description of the 2 task",
+      "status": "inProgress"
+    }
+  ],
+  "done": [
+    {
+      "id": 3,
+      "title": "Task 3",
+      "description": "Description of the 3rd task",
+      "status": "done"
+    }
+  ]
+}

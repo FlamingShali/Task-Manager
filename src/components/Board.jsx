@@ -33,6 +33,7 @@ const Board = () => {
       })
     );
   }
+  useFetchInitialState();
 
   function handleSwitchStatus(to) {
     dispatch(
