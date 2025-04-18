@@ -3,3 +3,7 @@
 body {
   background-color: var(--color-gray-900);
 }
+
+@theme {
+  --color-dark-violet: #1e1e2f; 
+}

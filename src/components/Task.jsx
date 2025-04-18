@@ -5,7 +5,7 @@ const Task = ({ task, onActiveTask, activeTask }) => {
         key={task.id}
         onClick={() => onActiveTask(task)}
         className={`border-[2px] m-5 rounded-[5px] border-gray-300 text-center list-none transition-all ${
-          activeTask?.id === task.id ? "bg-gray-800" : ""
+          activeTask?.id === task.id ? "bg-gray-400" : ""
         } cursor-pointer`}
         draggable="true"
       >

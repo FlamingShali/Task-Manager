@@ -1,16 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { tasksActions } from "../store/task-slice";
-import { DndContext, closestCorners } from "@dnd-kit/core";
-import { useState, useEffect } from "react";
 
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import TaskColumn from "./TaskColumn";
 import Task from "./Task";
 import Button from "./Button";
-import fetchInitialState from "../customHooks/fetchInitialState";
 import useFetchInitialState from "../customHooks/fetchInitialState";
 
 const statuses = ["toDo", "inProgress", "done"];
@@ -29,24 +22,15 @@ const Board = () => {
       tasksActions.createTask({
         id: taskId,
         title: "Added Task",
-        status: "inProgress",
+        status: toDo,
       })
     );
   }
   useFetchInitialState();
 
-  function handleSwitchStatus(to) {
-    dispatch(
-      tasksActions.moveTask({ id: activeTask.id, from: activeTask.status, to })
-    );
-    dispatch(tasksActions.setActiveTask(null));
-  }
-
   function handleActiveTask(task) {
     dispatch(tasksActions.setActiveTask(task));
   }
-
-  const onDragEnd = (event) => {};
 
   //   const year = new Date().getFullYear();
   //   const month = new Date().getMonth();
@@ -55,57 +39,54 @@ const Board = () => {
 
   return (
     <>
-      <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-        <div className="w-full h-full flex justify-between self-center flex-col">
-          <h1 className="w-full text-[2rem] 0 m-10 border-b-[2px] border-gray-300 ">
-            Tasks
-          </h1>
-          <div className="flex h-full w-full">
-            <TaskColumn status={toDo}>
-              {tasks.toDo.map((task) => (
-                <Task
-                  task={task}
-                  key={task.id}
-                  taskType={toDo}
-                  onActiveTask={handleActiveTask}
-                  activeTask={activeTask}
-                />
-              ))}
-            </TaskColumn>
-            <TaskColumn status={inProgress}>
-              {tasks.inProgress.map((task) => (
-                <Task
-                  task={task}
-                  key={task.id}
-                  taskType={inProgress}
-                  onActiveTask={handleActiveTask}
-                  activeTask={activeTask}
-                />
-              ))}
-            </TaskColumn>
-            <TaskColumn status={done}>
-              {tasks.done.map((task) => (
-                <Task
-                  task={task}
-                  key={task.id}
-                  taskType={done}
-                  onActiveTask={handleActiveTask}
-                  activeTask={activeTask}
-                />
-              ))}
-            </TaskColumn>
-          </div>
-          <div>
-            <Button clickHandler={handleNewTask}>Test create</Button>
-            <Button clickHandler={() => handleSwitchStatus(inProgress)}>
-              Move to In progress
-            </Button>
-            <Button clickHandler={() => handleSwitchStatus(done)}>
-              Mark as Done
-            </Button>
-          </div>
+      <div className="w-full h-full flex justify-between self-center flex-col">
+        <h1 className="w-full text-[2rem] 0 m-10 border-b-[2px] border-gray-300 ">
+          Tasks
+        </h1>
+        <div className="flex h-full w-full">
+          <TaskColumn status={toDo}>
+            {tasks.toDo.map((task) => (
+              <Task
+                task={task}
+                key={task.id}
+                taskType={toDo}
+                onActiveTask={handleActiveTask}
+                activeTask={activeTask}
+              />
+            ))}
+          </TaskColumn>
+          <TaskColumn status={inProgress}>
+            {tasks.inProgress.map((task) => (
+              <Task
+                task={task}
+                key={task.id}
+                taskType={inProgress}
+                onActiveTask={handleActiveTask}
+                activeTask={activeTask}
+              />
+            ))}
+          </TaskColumn>
+          <TaskColumn status={done}>
+            {tasks.done.map((task) => (
+              <Task
+                task={task}
+                key={task.id}
+                taskType={done}
+                onActiveTask={handleActiveTask}
+                activeTask={activeTask}
+              />
+            ))}
+          </TaskColumn>
         </div>
-      </DndContext>
+        <div className="flex flex-col justify-center items-center w-full h-1/12">
+          <Button>Create new Task </Button>
+          <input
+            className="border-[1px] w-11/12 text-center rounded-[10px]"
+            type="text"
+            placeholder="Task Title"
+          />
+        </div>
+      </div>
     </>
   );
 };
