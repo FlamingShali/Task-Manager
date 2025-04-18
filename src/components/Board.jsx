@@ -9,7 +9,6 @@ import {
 import TaskColumn from "./TaskColumn";
 import Task from "./Task";
 import Button from "./Button";
-import { useState } from "react";
 
 const statuses = ["toDo", "inProgress", "done"];
 const toDo = statuses[0];
@@ -18,8 +17,8 @@ const done = statuses[2];
 
 const Board = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
+  const activeTask = useSelector((state) => state.tasks.activeTask);
   const dispatch = useDispatch();
-  const [activeTask, setActiveTask] = useState(null);
 
   const taskId = (Math.random() * 500).toFixed(2);
   function handleNewTask() {
@@ -27,21 +26,22 @@ const Board = () => {
       tasksActions.createTask({
         id: taskId,
         title: "Added Task",
-        status: "in progress",
+        status: "inProgress",
       })
     );
   }
 
-  function handleSwitchStatus() {
-    dispatch(tasksActions.moveTask({ id: 1, from: toDo, to: inProgress }));
+  function handleSwitchStatus(to) {
+    dispatch(
+      tasksActions.moveTask({ id: activeTask.id, from: activeTask.status, to })
+    );
+    dispatch(tasksActions.setActiveTask(null));
   }
 
   function handleActiveTask(task) {
-    setActiveTask(task.id);
+    dispatch(tasksActions.setActiveTask(task));
   }
 
-  console.log(tasks);
-  console.log(activeTask);
   const onDragEnd = (event) => {};
 
   //   const year = new Date().getFullYear();
@@ -92,8 +92,12 @@ const Board = () => {
             </TaskColumn>
           </div>
           <Button clickHandler={handleNewTask}>Test create</Button>
-          <Button clickHandler={handleSwitchStatus}>Test switch</Button>
-          <Button clickHandler={handleSwitchStatus}>Test switch</Button>
+          <Button clickHandler={() => handleSwitchStatus(inProgress)}>
+            Move to In progress
+          </Button>
+          <Button clickHandler={() => handleSwitchStatus(done)}>
+            Mark as Done
+          </Button>
         </div>
       </DndContext>
     </>

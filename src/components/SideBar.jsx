@@ -11,6 +11,7 @@ const SideBar = () => {
       <Button>Reports</Button>
       <Button>Payments</Button>
       <Button>Integration</Button>
+      
     </aside>
   );
 };

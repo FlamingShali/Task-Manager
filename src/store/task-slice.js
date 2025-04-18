@@ -27,6 +27,8 @@ const initialTaskState = {
       },
     ],
   },
+  selectedTask: null,
+  activeTask: null,
 };
 
 const tasksSlice = createSlice({
@@ -35,6 +37,12 @@ const tasksSlice = createSlice({
   reducers: {
     createTask(state, action) {
       state.tasks.inProgress.push(action.payload);
+    },
+    setActiveTask(state, action) {
+      state.activeTask = action.payload;
+    },
+    setSelectedTask(state, action) {
+      state.selectedTask = action.payload;
     },
 
     moveTask(state, action) {
@@ -49,15 +57,16 @@ const tasksSlice = createSlice({
         const task = sourceList.splice(taskIndex, 1)[0];
         task.status = to;
         targetList.push(task);
+        console.log(task);
       }
     },
-    removeTask(state, action) {
-      const { id, array } = action.payload;
-      const targetList = state.tasks[array];
-      let removedTask = targetList.findIndex((task) => task.id === id);
+    // removeTask(state, action) {
+    //   const { id, array } = action.payload;
+    //   const targetList = state.tasks[array];
+    //   let removedTask = targetList.findIndex((task) => task.id === id);
 
-      const task = targetList.splice(taskIndex, 1)[0];
-    },
+    //   const task = targetList.splice(taskIndex, 1)[0];
+    // },
   },
 });
 
