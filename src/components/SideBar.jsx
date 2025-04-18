@@ -13,6 +13,11 @@ const SideBar = () => {
         <Button>Payments</Button>
         <Button>Integration</Button>
       </div>
+      <div className="flex flex-col items-center justify-start h-1/2 w-full">
+        <h1 className="border-y-[2px] border-gray-300 w-full text-center">
+          Task Actions
+        </h1>
+      </div>
     </aside>
   );
 };

@@ -1,0 +1,15 @@
+import { useEffect } from "react";
+
+function useFetchInitialState() {
+  useEffect(() => {
+    async function fetchTasks() {
+      const res = await fetch("http://localhost:3001/api/tasks");
+      const data = await res.json();
+      console.log(data);
+      return data;
+    }
+    fetchTasks();
+  }, []);
+}
+
+export default useFetchInitialState;

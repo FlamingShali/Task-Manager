@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { tasksActions } from "../store/task-slice";
 import { DndContext, closestCorners } from "@dnd-kit/core";
+import { useState, useEffect } from "react";
 
 import {
   SortableContext,
@@ -9,6 +10,8 @@ import {
 import TaskColumn from "./TaskColumn";
 import Task from "./Task";
 import Button from "./Button";
+import fetchInitialState from "../customHooks/fetchInitialState";
+import useFetchInitialState from "../customHooks/fetchInitialState";
 
 const statuses = ["toDo", "inProgress", "done"];
 const toDo = statuses[0];
@@ -91,13 +94,15 @@ const Board = () => {
               ))}
             </TaskColumn>
           </div>
-          <Button clickHandler={handleNewTask}>Test create</Button>
-          <Button clickHandler={() => handleSwitchStatus(inProgress)}>
-            Move to In progress
-          </Button>
-          <Button clickHandler={() => handleSwitchStatus(done)}>
-            Mark as Done
-          </Button>
+          <div>
+            <Button clickHandler={handleNewTask}>Test create</Button>
+            <Button clickHandler={() => handleSwitchStatus(inProgress)}>
+              Move to In progress
+            </Button>
+            <Button clickHandler={() => handleSwitchStatus(done)}>
+              Mark as Done
+            </Button>
+          </div>
         </div>
       </DndContext>
     </>
